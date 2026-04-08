@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from fraud_engine import calculate_risk, get_top_user, update_graph
 from database import insert_transaction, fetch_users, fetch_transactions
 from database import register_user, login_user, fetch_user, initialize_database
-
+import os
 app = Flask(__name__)
 
 # Initialize DB on startup
@@ -165,4 +165,7 @@ def top_user():
 
 # ------------------ RUN ------------------
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Render provides a PORT environment variable. If it's not there, use 5000.
+    port = int(os.environ.get("PORT", 5000))
+    # '0.0.0.0' tells Flask to accept connections from outside the server
+    app.run(host='0.0.0.0', port=port)
