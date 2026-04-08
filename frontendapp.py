@@ -303,7 +303,7 @@ def show_auth():
                         res = requests.post(f"{BASE_URL}/register", json={
                             "name": name, "mobile_number": mobile,
                             "password": password, "mpin": mpin
-                        }, timeout=5)
+                        }, timeout=30)
                         if res.status_code == 200:
                             st.success("✅ Account created! Please login with your mobile and MPIN.")
                             st.session_state.auth_tab = "login"
